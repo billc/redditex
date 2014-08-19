@@ -22,22 +22,24 @@ defmodule Redditex.CLI do
     case parse do
       { [ help: true ], _, _ }
         -> :help
-      { _, subreddit, _ }
-        -> { subreddit }
+      { _, args, _ }
+        -> args
       _ -> :help
     end
   end
 
   def process(:help) do
     IO.puts """
-    usage: redditex <subreddit>
+    usage: redditex <subreddit1> <subreddit2> <subreddit3> ...
     """
     System.halt(0)
   end
 
-  def process({ subreddit }) do
-    Redditex.Client.get(subreddit)
-    |> output_response
+  def process( subreddits ) do
+    subreddits
+    |> Enum.map( &(Task.async(Redditex.Client, :get, [&1])))
+    |> Enum.map( &(Task.await(&1)))
+    |> Enum.each( fn(x) -> output_response(x) end)
   end
 
   def output_response({ :ok, items }) do

@@ -1,4 +1,5 @@
 defmodule Redditex.Client do
+
   @user_agent [ {"User-agent", "Elixir test@example.com"}]
 
   def get(subreddit) do

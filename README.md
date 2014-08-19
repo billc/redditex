@@ -19,4 +19,4 @@ With the Elixir version was a exercise for my own personal learning. I borrowed 
 
 * well suited to interfacing with HTTP APIs via the HTTPoison library.
 
-* even with the added complexity of functional programming, the solution felt more straight forward than the Dart port. This may be due to the added difficulty introduced by asynchronous programming that I avoided in the Elixir version. Elixir supports asynchronous execution, but I did not tackle it with this version.
+* even with the added complexity of functional programming, the solution felt more straight forward than the Dart port. 
